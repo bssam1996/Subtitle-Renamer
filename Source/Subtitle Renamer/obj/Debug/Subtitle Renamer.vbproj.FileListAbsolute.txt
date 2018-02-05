@@ -1,0 +1,10 @@
+D:\Bssam's\My Works\Subtitle Renamer\Subtitle Renamer\bin\Debug\Subtitle Renamer.exe
+D:\Bssam's\My Works\Subtitle Renamer\Subtitle Renamer\bin\Debug\Subtitle Renamer.pdb
+D:\Bssam's\My Works\Subtitle Renamer\Subtitle Renamer\bin\Debug\Subtitle Renamer.xml
+D:\Bssam's\My Works\Subtitle Renamer\Subtitle Renamer\obj\Debug\Subtitle_Renamer.Form1.resources
+D:\Bssam's\My Works\Subtitle Renamer\Subtitle Renamer\obj\Debug\Subtitle_Renamer.Resources.resources
+D:\Bssam's\My Works\Subtitle Renamer\Subtitle Renamer\obj\Debug\Subtitle Renamer.vbproj.GenerateResource.Cache
+D:\Bssam's\My Works\Subtitle Renamer\Subtitle Renamer\obj\Debug\Subtitle Renamer.exe
+D:\Bssam's\My Works\Subtitle Renamer\Subtitle Renamer\obj\Debug\Subtitle Renamer.xml
+D:\Bssam's\My Works\Subtitle Renamer\Subtitle Renamer\obj\Debug\Subtitle Renamer.pdb
+D:\Bssam's\My Works\Subtitle Renamer\Subtitle Renamer\obj\Debug\Subtitle_Renamer.About.resources
