@@ -191,6 +191,8 @@ Partial Class About
         Me.TextBox2.ScrollBars = System.Windows.Forms.ScrollBars.Vertical
         Me.TextBox2.Size = New System.Drawing.Size(301, 325)
         Me.TextBox2.TabIndex = 0
+        Me.TextBox2.Text = "Version 1.1:-" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "-Added .ASS extension." & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "-Added dublicating names in multible subti" &
+    "tles with different extensions."
         '
         'About
         '

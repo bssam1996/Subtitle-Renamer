@@ -235,8 +235,8 @@ Public Class Form1
         Try
             For k = 0 To subnumber - 2
                 For i = k + 1 To subnumber - 1
-                    If ListView1.Items(k).SubItems(5).Text = ListView1.Items(i).SubItems(5).Text Then
-                        MsgBox("There is a repeated number in row " + ListView1.Items(k).Text + " With row " + ListView1.Items(i).Text)
+                    If ListView1.Items(k).SubItems(3).Text = ListView1.Items(i).SubItems(3).Text And ListView1.Items(k).SubItems(4).Text = ListView1.Items(i).SubItems(4).Text Then
+                        MsgBox("There is a repeated subtitle name in row " + ListView1.Items(k).Text + " With row " + ListView1.Items(i).Text)
                         Exit Sub
                     End If
                 Next

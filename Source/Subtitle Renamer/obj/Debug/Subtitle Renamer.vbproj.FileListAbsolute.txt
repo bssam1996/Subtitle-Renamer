@@ -8,3 +8,4 @@ D:\Bssam's\My Works\Subtitle Renamer\Subtitle Renamer\obj\Debug\Subtitle Renamer
 D:\Bssam's\My Works\Subtitle Renamer\Subtitle Renamer\obj\Debug\Subtitle Renamer.xml
 D:\Bssam's\My Works\Subtitle Renamer\Subtitle Renamer\obj\Debug\Subtitle Renamer.pdb
 D:\Bssam's\My Works\Subtitle Renamer\Subtitle Renamer\obj\Debug\Subtitle_Renamer.About.resources
+D:\Bssam's\My Works\Subtitle Renamer\Subtitle Renamer\obj\Debug\Subtitle Renamer.vbprojResolveAssemblyReference.cache

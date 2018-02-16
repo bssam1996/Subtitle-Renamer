@@ -72,6 +72,7 @@ Partial Class Form1
         Me.CheckBox16 = New System.Windows.Forms.CheckBox()
         Me.CheckBox14 = New System.Windows.Forms.CheckBox()
         Me.CheckBox15 = New System.Windows.Forms.CheckBox()
+        Me.CheckBox1 = New System.Windows.Forms.CheckBox()
         Me.ContextMenuStrip2.SuspendLayout()
         Me.ContextMenuStrip1.SuspendLayout()
         Me.GroupBox1.SuspendLayout()
@@ -152,7 +153,7 @@ Partial Class Form1
         '
         Me.ContextMenuStrip2.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.DeleteThisItemToolStripMenuItem, Me.ClearAllToolStripMenuItem, Me.ChangeTheViewToolStripMenuItem, Me.ResetFillingToolStripMenuItem, Me.ExcludeInChangingToolStripMenuItem})
         Me.ContextMenuStrip2.Name = "ContextMenuStrip2"
-        Me.ContextMenuStrip2.Size = New System.Drawing.Size(183, 136)
+        Me.ContextMenuStrip2.Size = New System.Drawing.Size(183, 114)
         '
         'DeleteThisItemToolStripMenuItem
         '
@@ -486,6 +487,7 @@ Partial Class Form1
         '
         Me.GroupBox2.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.GroupBox2.ContextMenuStrip = Me.ContextMenuStrip3
+        Me.GroupBox2.Controls.Add(Me.CheckBox1)
         Me.GroupBox2.Controls.Add(Me.CheckBox16)
         Me.GroupBox2.Controls.Add(Me.CheckBox14)
         Me.GroupBox2.Controls.Add(Me.CheckBox15)
@@ -531,6 +533,18 @@ Partial Class Form1
         Me.CheckBox15.TabIndex = 12
         Me.CheckBox15.Text = ".SRT"
         Me.CheckBox15.UseVisualStyleBackColor = True
+        '
+        'CheckBox1
+        '
+        Me.CheckBox1.AutoSize = True
+        Me.CheckBox1.Checked = True
+        Me.CheckBox1.CheckState = System.Windows.Forms.CheckState.Checked
+        Me.CheckBox1.Location = New System.Drawing.Point(61, 37)
+        Me.CheckBox1.Name = "CheckBox1"
+        Me.CheckBox1.Size = New System.Drawing.Size(49, 17)
+        Me.CheckBox1.TabIndex = 15
+        Me.CheckBox1.Text = ".ASS"
+        Me.CheckBox1.UseVisualStyleBackColor = True
         '
         'Form1
         '
@@ -615,4 +629,5 @@ Partial Class Form1
     Friend WithEvents CheckBox14 As CheckBox
     Friend WithEvents CheckBox15 As CheckBox
     Friend WithEvents ExcludeInChangingToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents CheckBox1 As CheckBox
 End Class
