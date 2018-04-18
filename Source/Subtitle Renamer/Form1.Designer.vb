@@ -69,10 +69,11 @@ Partial Class Form1
         Me.CheckBox3 = New System.Windows.Forms.CheckBox()
         Me.CheckBox2 = New System.Windows.Forms.CheckBox()
         Me.GroupBox2 = New System.Windows.Forms.GroupBox()
+        Me.CheckBox1 = New System.Windows.Forms.CheckBox()
         Me.CheckBox16 = New System.Windows.Forms.CheckBox()
         Me.CheckBox14 = New System.Windows.Forms.CheckBox()
         Me.CheckBox15 = New System.Windows.Forms.CheckBox()
-        Me.CheckBox1 = New System.Windows.Forms.CheckBox()
+        Me.CheckBox17 = New System.Windows.Forms.CheckBox()
         Me.ContextMenuStrip2.SuspendLayout()
         Me.ContextMenuStrip1.SuspendLayout()
         Me.GroupBox1.SuspendLayout()
@@ -83,7 +84,7 @@ Partial Class Form1
         'Button1
         '
         Me.Button1.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
-        Me.Button1.Location = New System.Drawing.Point(150, 206)
+        Me.Button1.Location = New System.Drawing.Point(150, 212)
         Me.Button1.Name = "Button1"
         Me.Button1.Size = New System.Drawing.Size(25, 23)
         Me.Button1.TabIndex = 0
@@ -95,7 +96,7 @@ Partial Class Form1
         '
         Me.Label1.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
         Me.Label1.AutoSize = True
-        Me.Label1.Location = New System.Drawing.Point(181, 212)
+        Me.Label1.Location = New System.Drawing.Point(181, 218)
         Me.Label1.Name = "Label1"
         Me.Label1.Size = New System.Drawing.Size(47, 13)
         Me.Label1.TabIndex = 1
@@ -215,7 +216,7 @@ Partial Class Form1
         '
         Me.apply.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
         Me.apply.Enabled = False
-        Me.apply.Location = New System.Drawing.Point(139, 262)
+        Me.apply.Location = New System.Drawing.Point(139, 280)
         Me.apply.Name = "apply"
         Me.apply.Size = New System.Drawing.Size(62, 33)
         Me.apply.TabIndex = 10
@@ -229,7 +230,7 @@ Partial Class Form1
         Me.plus.BackgroundImage = CType(resources.GetObject("plus.BackgroundImage"), System.Drawing.Image)
         Me.plus.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
         Me.plus.Enabled = False
-        Me.plus.Location = New System.Drawing.Point(124, 235)
+        Me.plus.Location = New System.Drawing.Point(124, 253)
         Me.plus.Name = "plus"
         Me.plus.Size = New System.Drawing.Size(41, 23)
         Me.plus.TabIndex = 8
@@ -242,7 +243,7 @@ Partial Class Form1
         Me.minus.BackgroundImage = CType(resources.GetObject("minus.BackgroundImage"), System.Drawing.Image)
         Me.minus.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
         Me.minus.Enabled = False
-        Me.minus.Location = New System.Drawing.Point(171, 235)
+        Me.minus.Location = New System.Drawing.Point(171, 253)
         Me.minus.Name = "minus"
         Me.minus.Size = New System.Drawing.Size(41, 23)
         Me.minus.TabIndex = 9
@@ -273,7 +274,7 @@ Partial Class Form1
         '
         Me.Label2.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
         Me.Label2.AutoSize = True
-        Me.Label2.Location = New System.Drawing.Point(11, 262)
+        Me.Label2.Location = New System.Drawing.Point(11, 280)
         Me.Label2.Name = "Label2"
         Me.Label2.Size = New System.Drawing.Size(84, 26)
         Me.Label2.TabIndex = 4
@@ -285,7 +286,7 @@ Partial Class Form1
         Me.automaticfillingcheckbox.AutoSize = True
         Me.automaticfillingcheckbox.Checked = True
         Me.automaticfillingcheckbox.CheckState = System.Windows.Forms.CheckState.Checked
-        Me.automaticfillingcheckbox.Location = New System.Drawing.Point(13, 211)
+        Me.automaticfillingcheckbox.Location = New System.Drawing.Point(13, 217)
         Me.automaticfillingcheckbox.Name = "automaticfillingcheckbox"
         Me.automaticfillingcheckbox.Size = New System.Drawing.Size(131, 17)
         Me.automaticfillingcheckbox.TabIndex = 6
@@ -296,7 +297,7 @@ Partial Class Form1
         '
         Me.fillascending.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
         Me.fillascending.Enabled = False
-        Me.fillascending.Location = New System.Drawing.Point(8, 235)
+        Me.fillascending.Location = New System.Drawing.Point(8, 253)
         Me.fillascending.Name = "fillascending"
         Me.fillascending.Size = New System.Drawing.Size(110, 23)
         Me.fillascending.TabIndex = 7
@@ -319,7 +320,7 @@ Partial Class Form1
         Me.GroupBox1.Controls.Add(Me.CheckBox4)
         Me.GroupBox1.Controls.Add(Me.CheckBox3)
         Me.GroupBox1.Controls.Add(Me.CheckBox2)
-        Me.GroupBox1.Location = New System.Drawing.Point(218, 235)
+        Me.GroupBox1.Location = New System.Drawing.Point(218, 253)
         Me.GroupBox1.Name = "GroupBox1"
         Me.GroupBox1.Size = New System.Drawing.Size(363, 60)
         Me.GroupBox1.TabIndex = 11
@@ -487,16 +488,29 @@ Partial Class Form1
         '
         Me.GroupBox2.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.GroupBox2.ContextMenuStrip = Me.ContextMenuStrip3
+        Me.GroupBox2.Controls.Add(Me.CheckBox17)
         Me.GroupBox2.Controls.Add(Me.CheckBox1)
         Me.GroupBox2.Controls.Add(Me.CheckBox16)
         Me.GroupBox2.Controls.Add(Me.CheckBox14)
         Me.GroupBox2.Controls.Add(Me.CheckBox15)
-        Me.GroupBox2.Location = New System.Drawing.Point(587, 235)
+        Me.GroupBox2.Location = New System.Drawing.Point(587, 230)
         Me.GroupBox2.Name = "GroupBox2"
-        Me.GroupBox2.Size = New System.Drawing.Size(118, 60)
+        Me.GroupBox2.Size = New System.Drawing.Size(118, 83)
         Me.GroupBox2.TabIndex = 12
         Me.GroupBox2.TabStop = False
         Me.GroupBox2.Text = "Filter Sub ext"
+        '
+        'CheckBox1
+        '
+        Me.CheckBox1.AutoSize = True
+        Me.CheckBox1.Checked = True
+        Me.CheckBox1.CheckState = System.Windows.Forms.CheckState.Checked
+        Me.CheckBox1.Location = New System.Drawing.Point(61, 37)
+        Me.CheckBox1.Name = "CheckBox1"
+        Me.CheckBox1.Size = New System.Drawing.Size(49, 17)
+        Me.CheckBox1.TabIndex = 15
+        Me.CheckBox1.Text = ".ASS"
+        Me.CheckBox1.UseVisualStyleBackColor = True
         '
         'CheckBox16
         '
@@ -534,24 +548,24 @@ Partial Class Form1
         Me.CheckBox15.Text = ".SRT"
         Me.CheckBox15.UseVisualStyleBackColor = True
         '
-        'CheckBox1
+        'CheckBox17
         '
-        Me.CheckBox1.AutoSize = True
-        Me.CheckBox1.Checked = True
-        Me.CheckBox1.CheckState = System.Windows.Forms.CheckState.Checked
-        Me.CheckBox1.Location = New System.Drawing.Point(61, 37)
-        Me.CheckBox1.Name = "CheckBox1"
-        Me.CheckBox1.Size = New System.Drawing.Size(49, 17)
-        Me.CheckBox1.TabIndex = 15
-        Me.CheckBox1.Text = ".ASS"
-        Me.CheckBox1.UseVisualStyleBackColor = True
+        Me.CheckBox17.AutoSize = True
+        Me.CheckBox17.Checked = True
+        Me.CheckBox17.CheckState = System.Windows.Forms.CheckState.Checked
+        Me.CheckBox17.Location = New System.Drawing.Point(6, 57)
+        Me.CheckBox17.Name = "CheckBox17"
+        Me.CheckBox17.Size = New System.Drawing.Size(49, 17)
+        Me.CheckBox17.TabIndex = 16
+        Me.CheckBox17.Text = ".SUP"
+        Me.CheckBox17.UseVisualStyleBackColor = True
         '
         'Form1
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.SkyBlue
-        Me.ClientSize = New System.Drawing.Size(713, 298)
+        Me.ClientSize = New System.Drawing.Size(713, 316)
         Me.ContextMenuStrip = Me.ContextMenuStrip1
         Me.Controls.Add(Me.GroupBox2)
         Me.Controls.Add(Me.GroupBox1)
@@ -630,4 +644,5 @@ Partial Class Form1
     Friend WithEvents CheckBox15 As CheckBox
     Friend WithEvents ExcludeInChangingToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents CheckBox1 As CheckBox
+    Friend WithEvents CheckBox17 As CheckBox
 End Class
