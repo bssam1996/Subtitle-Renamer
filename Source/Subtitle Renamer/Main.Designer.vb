@@ -1,5 +1,5 @@
 ﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
-Partial Class Form1
+Partial Class Main
     Inherits System.Windows.Forms.Form
 
     'Form overrides dispose to clean up the component list.
@@ -23,7 +23,7 @@ Partial Class Form1
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
-        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(Form1))
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(Main))
         Me.FolderBrowserDialog1 = New System.Windows.Forms.FolderBrowserDialog()
         Me.Button1 = New System.Windows.Forms.Button()
         Me.Label1 = New System.Windows.Forms.Label()
@@ -34,7 +34,7 @@ Partial Class Form1
         Me.subtitle = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.sext = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.number = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
-        Me.ContextMenuStrip2 = New System.Windows.Forms.ContextMenuStrip(Me.components)
+        Me.ListContextMenuStrip = New System.Windows.Forms.ContextMenuStrip(Me.components)
         Me.DeleteThisItemToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ClearAllToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ChangeTheViewToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
@@ -47,14 +47,15 @@ Partial Class Form1
         Me.apply = New System.Windows.Forms.Button()
         Me.plus = New System.Windows.Forms.Button()
         Me.minus = New System.Windows.Forms.Button()
-        Me.ContextMenuStrip1 = New System.Windows.Forms.ContextMenuStrip(Me.components)
+        Me.MainContextMenuStrip = New System.Windows.Forms.ContextMenuStrip(Me.components)
+        Me.AlwaysOnTopToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.AboutToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.EndToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.Label2 = New System.Windows.Forms.Label()
         Me.automaticfillingcheckbox = New System.Windows.Forms.CheckBox()
         Me.fillascending = New System.Windows.Forms.Button()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
-        Me.ContextMenuStrip3 = New System.Windows.Forms.ContextMenuStrip(Me.components)
+        Me.FilterContextMenuStrip = New System.Windows.Forms.ContextMenuStrip(Me.components)
         Me.CheckUncheckToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.CheckBox13 = New System.Windows.Forms.CheckBox()
         Me.CheckBox12 = New System.Windows.Forms.CheckBox()
@@ -69,15 +70,16 @@ Partial Class Form1
         Me.CheckBox3 = New System.Windows.Forms.CheckBox()
         Me.CheckBox2 = New System.Windows.Forms.CheckBox()
         Me.GroupBox2 = New System.Windows.Forms.GroupBox()
+        Me.CheckBox17 = New System.Windows.Forms.CheckBox()
         Me.CheckBox1 = New System.Windows.Forms.CheckBox()
         Me.CheckBox16 = New System.Windows.Forms.CheckBox()
         Me.CheckBox14 = New System.Windows.Forms.CheckBox()
         Me.CheckBox15 = New System.Windows.Forms.CheckBox()
-        Me.CheckBox17 = New System.Windows.Forms.CheckBox()
-        Me.ContextMenuStrip2.SuspendLayout()
-        Me.ContextMenuStrip1.SuspendLayout()
+        Me.CheckForUpdatesToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ListContextMenuStrip.SuspendLayout()
+        Me.MainContextMenuStrip.SuspendLayout()
         Me.GroupBox1.SuspendLayout()
-        Me.ContextMenuStrip3.SuspendLayout()
+        Me.FilterContextMenuStrip.SuspendLayout()
         Me.GroupBox2.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -108,7 +110,7 @@ Partial Class Form1
         Me.ListView1.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.ListView1.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.num, Me.movie, Me.vext, Me.subtitle, Me.sext, Me.number})
-        Me.ListView1.ContextMenuStrip = Me.ContextMenuStrip2
+        Me.ListView1.ContextMenuStrip = Me.ListContextMenuStrip
         Me.ListView1.FullRowSelect = True
         Me.ListView1.GridLines = True
         Me.ListView1.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable
@@ -116,6 +118,7 @@ Partial Class Form1
         Me.ListView1.Name = "ListView1"
         Me.ListView1.Size = New System.Drawing.Size(689, 193)
         Me.ListView1.TabIndex = 2
+        Me.ToolTip1.SetToolTip(Me.ListView1, "You can rearrange subtitles using plus/minus key on keyboard")
         Me.ListView1.UseCompatibleStateImageBehavior = False
         Me.ListView1.View = System.Windows.Forms.View.Details
         '
@@ -150,11 +153,11 @@ Partial Class Form1
         Me.number.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
         Me.number.Width = 78
         '
-        'ContextMenuStrip2
+        'ListContextMenuStrip
         '
-        Me.ContextMenuStrip2.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.DeleteThisItemToolStripMenuItem, Me.ClearAllToolStripMenuItem, Me.ChangeTheViewToolStripMenuItem, Me.ResetFillingToolStripMenuItem, Me.ExcludeInChangingToolStripMenuItem})
-        Me.ContextMenuStrip2.Name = "ContextMenuStrip2"
-        Me.ContextMenuStrip2.Size = New System.Drawing.Size(183, 114)
+        Me.ListContextMenuStrip.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.DeleteThisItemToolStripMenuItem, Me.ClearAllToolStripMenuItem, Me.ChangeTheViewToolStripMenuItem, Me.ResetFillingToolStripMenuItem, Me.ExcludeInChangingToolStripMenuItem})
+        Me.ListContextMenuStrip.Name = "ContextMenuStrip2"
+        Me.ListContextMenuStrip.Size = New System.Drawing.Size(183, 114)
         '
         'DeleteThisItemToolStripMenuItem
         '
@@ -250,24 +253,30 @@ Partial Class Form1
         Me.ToolTip1.SetToolTip(Me.minus, "Subtract 1")
         Me.minus.UseVisualStyleBackColor = True
         '
-        'ContextMenuStrip1
+        'MainContextMenuStrip
         '
-        Me.ContextMenuStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.AboutToolStripMenuItem, Me.EndToolStripMenuItem})
-        Me.ContextMenuStrip1.Name = "ContextMenuStrip1"
-        Me.ContextMenuStrip1.Size = New System.Drawing.Size(108, 48)
+        Me.MainContextMenuStrip.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.CheckForUpdatesToolStripMenuItem, Me.AlwaysOnTopToolStripMenuItem, Me.AboutToolStripMenuItem, Me.EndToolStripMenuItem})
+        Me.MainContextMenuStrip.Name = "ContextMenuStrip1"
+        Me.MainContextMenuStrip.Size = New System.Drawing.Size(171, 92)
+        '
+        'AlwaysOnTopToolStripMenuItem
+        '
+        Me.AlwaysOnTopToolStripMenuItem.Name = "AlwaysOnTopToolStripMenuItem"
+        Me.AlwaysOnTopToolStripMenuItem.Size = New System.Drawing.Size(170, 22)
+        Me.AlwaysOnTopToolStripMenuItem.Text = "Always On Top"
         '
         'AboutToolStripMenuItem
         '
         Me.AboutToolStripMenuItem.Image = CType(resources.GetObject("AboutToolStripMenuItem.Image"), System.Drawing.Image)
         Me.AboutToolStripMenuItem.Name = "AboutToolStripMenuItem"
-        Me.AboutToolStripMenuItem.Size = New System.Drawing.Size(107, 22)
+        Me.AboutToolStripMenuItem.Size = New System.Drawing.Size(170, 22)
         Me.AboutToolStripMenuItem.Text = "About"
         '
         'EndToolStripMenuItem
         '
         Me.EndToolStripMenuItem.Image = CType(resources.GetObject("EndToolStripMenuItem.Image"), System.Drawing.Image)
         Me.EndToolStripMenuItem.Name = "EndToolStripMenuItem"
-        Me.EndToolStripMenuItem.Size = New System.Drawing.Size(107, 22)
+        Me.EndToolStripMenuItem.Size = New System.Drawing.Size(170, 22)
         Me.EndToolStripMenuItem.Text = "End"
         '
         'Label2
@@ -307,7 +316,7 @@ Partial Class Form1
         'GroupBox1
         '
         Me.GroupBox1.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.GroupBox1.ContextMenuStrip = Me.ContextMenuStrip3
+        Me.GroupBox1.ContextMenuStrip = Me.FilterContextMenuStrip
         Me.GroupBox1.Controls.Add(Me.CheckBox13)
         Me.GroupBox1.Controls.Add(Me.CheckBox12)
         Me.GroupBox1.Controls.Add(Me.CheckBox11)
@@ -327,11 +336,11 @@ Partial Class Form1
         Me.GroupBox1.TabStop = False
         Me.GroupBox1.Text = "Filter adding extensions for videos"
         '
-        'ContextMenuStrip3
+        'FilterContextMenuStrip
         '
-        Me.ContextMenuStrip3.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.CheckUncheckToolStripMenuItem})
-        Me.ContextMenuStrip3.Name = "ContextMenuStrip3"
-        Me.ContextMenuStrip3.Size = New System.Drawing.Size(176, 26)
+        Me.FilterContextMenuStrip.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.CheckUncheckToolStripMenuItem})
+        Me.FilterContextMenuStrip.Name = "ContextMenuStrip3"
+        Me.FilterContextMenuStrip.Size = New System.Drawing.Size(176, 26)
         '
         'CheckUncheckToolStripMenuItem
         '
@@ -487,7 +496,7 @@ Partial Class Form1
         'GroupBox2
         '
         Me.GroupBox2.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.GroupBox2.ContextMenuStrip = Me.ContextMenuStrip3
+        Me.GroupBox2.ContextMenuStrip = Me.FilterContextMenuStrip
         Me.GroupBox2.Controls.Add(Me.CheckBox17)
         Me.GroupBox2.Controls.Add(Me.CheckBox1)
         Me.GroupBox2.Controls.Add(Me.CheckBox16)
@@ -499,6 +508,18 @@ Partial Class Form1
         Me.GroupBox2.TabIndex = 12
         Me.GroupBox2.TabStop = False
         Me.GroupBox2.Text = "Filter Sub ext"
+        '
+        'CheckBox17
+        '
+        Me.CheckBox17.AutoSize = True
+        Me.CheckBox17.Checked = True
+        Me.CheckBox17.CheckState = System.Windows.Forms.CheckState.Checked
+        Me.CheckBox17.Location = New System.Drawing.Point(6, 57)
+        Me.CheckBox17.Name = "CheckBox17"
+        Me.CheckBox17.Size = New System.Drawing.Size(49, 17)
+        Me.CheckBox17.TabIndex = 16
+        Me.CheckBox17.Text = ".SUP"
+        Me.CheckBox17.UseVisualStyleBackColor = True
         '
         'CheckBox1
         '
@@ -548,25 +569,20 @@ Partial Class Form1
         Me.CheckBox15.Text = ".SRT"
         Me.CheckBox15.UseVisualStyleBackColor = True
         '
-        'CheckBox17
+        'CheckForUpdatesToolStripMenuItem
         '
-        Me.CheckBox17.AutoSize = True
-        Me.CheckBox17.Checked = True
-        Me.CheckBox17.CheckState = System.Windows.Forms.CheckState.Checked
-        Me.CheckBox17.Location = New System.Drawing.Point(6, 57)
-        Me.CheckBox17.Name = "CheckBox17"
-        Me.CheckBox17.Size = New System.Drawing.Size(49, 17)
-        Me.CheckBox17.TabIndex = 16
-        Me.CheckBox17.Text = ".SUP"
-        Me.CheckBox17.UseVisualStyleBackColor = True
+        Me.CheckForUpdatesToolStripMenuItem.Image = CType(resources.GetObject("CheckForUpdatesToolStripMenuItem.Image"), System.Drawing.Image)
+        Me.CheckForUpdatesToolStripMenuItem.Name = "CheckForUpdatesToolStripMenuItem"
+        Me.CheckForUpdatesToolStripMenuItem.Size = New System.Drawing.Size(170, 22)
+        Me.CheckForUpdatesToolStripMenuItem.Text = "Check for updates"
         '
-        'Form1
+        'Main
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.SkyBlue
         Me.ClientSize = New System.Drawing.Size(713, 316)
-        Me.ContextMenuStrip = Me.ContextMenuStrip1
+        Me.ContextMenuStrip = Me.MainContextMenuStrip
         Me.Controls.Add(Me.GroupBox2)
         Me.Controls.Add(Me.GroupBox1)
         Me.Controls.Add(Me.apply)
@@ -580,14 +596,14 @@ Partial Class Form1
         Me.Controls.Add(Me.Button1)
         Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.MinimumSize = New System.Drawing.Size(729, 337)
-        Me.Name = "Form1"
+        Me.Name = "Main"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "Subtitle Renamer"
-        Me.ContextMenuStrip2.ResumeLayout(False)
-        Me.ContextMenuStrip1.ResumeLayout(False)
+        Me.ListContextMenuStrip.ResumeLayout(False)
+        Me.MainContextMenuStrip.ResumeLayout(False)
         Me.GroupBox1.ResumeLayout(False)
         Me.GroupBox1.PerformLayout()
-        Me.ContextMenuStrip3.ResumeLayout(False)
+        Me.FilterContextMenuStrip.ResumeLayout(False)
         Me.GroupBox2.ResumeLayout(False)
         Me.GroupBox2.PerformLayout()
         Me.ResumeLayout(False)
@@ -603,10 +619,10 @@ Partial Class Form1
     Friend WithEvents movie As ColumnHeader
     Friend WithEvents subtitle As ColumnHeader
     Friend WithEvents number As ColumnHeader
-    Friend WithEvents ContextMenuStrip1 As ContextMenuStrip
+    Friend WithEvents MainContextMenuStrip As ContextMenuStrip
     Friend WithEvents AboutToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents EndToolStripMenuItem As ToolStripMenuItem
-    Friend WithEvents ContextMenuStrip2 As ContextMenuStrip
+    Friend WithEvents ListContextMenuStrip As ContextMenuStrip
     Friend WithEvents DeleteThisItemToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents ClearAllToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents ChangeTheViewToolStripMenuItem As ToolStripMenuItem
@@ -636,7 +652,7 @@ Partial Class Form1
     Friend WithEvents CheckBox4 As CheckBox
     Friend WithEvents CheckBox3 As CheckBox
     Friend WithEvents CheckBox2 As CheckBox
-    Friend WithEvents ContextMenuStrip3 As ContextMenuStrip
+    Friend WithEvents FilterContextMenuStrip As ContextMenuStrip
     Friend WithEvents CheckUncheckToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents GroupBox2 As GroupBox
     Friend WithEvents CheckBox16 As CheckBox
@@ -645,4 +661,6 @@ Partial Class Form1
     Friend WithEvents ExcludeInChangingToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents CheckBox1 As CheckBox
     Friend WithEvents CheckBox17 As CheckBox
+    Friend WithEvents AlwaysOnTopToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents CheckForUpdatesToolStripMenuItem As ToolStripMenuItem
 End Class

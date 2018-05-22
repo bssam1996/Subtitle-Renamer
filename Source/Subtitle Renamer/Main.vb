@@ -1,5 +1,5 @@
 ﻿Imports System.IO
-Public Class Form1
+Public Class Main
     Dim vnumber As Integer = 0
     Dim subnumber As Integer = 0
     Dim bigger As Integer
@@ -257,7 +257,7 @@ Public Class Form1
     End Sub
 
     Private Sub CheckUncheckToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles CheckUncheckToolStripMenuItem.Click
-        If ContextMenuStrip3.SourceControl Is GroupBox1 Then
+        If FilterContextMenuStrip.SourceControl Is GroupBox1 Then
             Dim checkstateselection As Boolean = True 'select all
             For Each checking As CheckBox In GroupBox1.Controls
                 If checking.Checked = True Then
@@ -273,7 +273,7 @@ Public Class Form1
                     checking.Checked = False
                 Next
             End If
-        ElseIf ContextMenuStrip3.SourceControl Is GroupBox2 Then
+        ElseIf FilterContextMenuStrip.SourceControl Is GroupBox2 Then
             Dim checkstateselection As Boolean = True 'select all
             For Each checking As CheckBox In GroupBox2.Controls
                 If checking.Checked = True Then
@@ -303,4 +303,111 @@ Public Class Form1
             MsgBox("There was an error occured" & vbNewLine & "Details :" & vbNewLine & ex.Message, MsgBoxStyle.Critical, "Error")
         End Try
     End Sub
+
+    Private Sub AlwaysOnTopToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles AlwaysOnTopToolStripMenuItem.Click
+        If AlwaysOnTopToolStripMenuItem.Checked = True Then
+            AlwaysOnTopToolStripMenuItem.Checked = False
+            Me.TopMost = False
+        Else
+            AlwaysOnTopToolStripMenuItem.Checked = True
+            Me.TopMost = True
+        End If
+    End Sub
+
+    Private Sub ListView1_KeyDown(sender As Object, e As KeyEventArgs) Handles ListView1.KeyDown
+        If e.KeyCode = Keys.Add Then
+            If plus.Enabled = True Then
+                Try
+                    If ListView1.SelectedItems.Count > 0 Then
+                        For i = 0 To ListView1.SelectedItems.Count - 1
+                            If ListView1.SelectedItems(i).SubItems(5).Text < vnumber Then
+                                ListView1.SelectedItems(i).SubItems(5).Text += 1
+                            End If
+                        Next
+                    End If
+                    '   ListView1.Focus()
+                Catch ex As Exception
+                    MsgBox("There was an error occured" & vbNewLine & "Details :" & vbNewLine & ex.Message, MsgBoxStyle.Critical, "Error")
+                End Try
+            End If
+        End If
+        If e.KeyCode = Keys.Subtract Then
+            Try
+                If ListView1.SelectedItems.Count > 0 Then
+                    For i = 0 To ListView1.SelectedItems.Count - 1
+                        If ListView1.SelectedItems(i).SubItems(5).Text > 1 Then
+                            ListView1.SelectedItems(i).SubItems(5).Text -= 1
+                        End If
+                    Next
+                End If
+                ' ListView1.Focus()
+            Catch ex As Exception
+                MsgBox("There was an error occured" & vbNewLine & "Details :" & vbNewLine & ex.Message, MsgBoxStyle.Critical, "Error")
+            End Try
+        End If
+    End Sub
+
+    Private Sub CheckForUpdatesToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles CheckForUpdatesToolStripMenuItem.Click
+        Try
+            If My.Computer.Network.IsAvailable Then
+                Dim request As System.Net.HttpWebRequest = System.Net.HttpWebRequest.Create("https://raw.githubusercontent.com/bssam1996/Subtitle-Renamer/master/Version")
+                Dim response As System.Net.HttpWebResponse = request.GetResponse()
+                Dim sr As System.IO.StreamReader = New System.IO.StreamReader(response.GetResponseStream())
+                Dim newestversion As String = sr.ReadToEnd()
+                Dim modnewestversion As String = newestversion.Replace(".", "")
+                Dim currentversion As String = Application.ProductVersion
+                currentversion = currentversion.Replace(".", "")
+                If Integer.Parse(modnewestversion) <= Integer.Parse(currentversion) Then
+                    MsgBox("You are up to date!", MsgBoxStyle.Information, "Version is up to date")
+                Else
+                    If MsgBox("Update Found Version : " + newestversion + vbNewLine + "Would you like to update now?", vbInformation + vbYesNo) = MsgBoxResult.Yes Then
+                        updateform.ShowDialog()
+                    End If
+                End If
+            Else
+                MsgBox("Please Check your network!", MsgBoxStyle.Critical, "Network Unavailable")
+            End If
+
+        Catch ex As Exception
+            MsgBox(ex.Message)
+        End Try
+    End Sub
+
+    Private Sub Main_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        Try
+            System.Windows.Forms.Control.CheckForIllegalCrossThreadCalls = False
+            Me.Text = "Subtitle-Renamer V" + Application.ProductVersion
+            If Microsoft.Win32.Registry.CurrentUser.OpenSubKey("SOFTWARE\Subtitle-Renamer") Is Nothing Then
+                Microsoft.Win32.Registry.CurrentUser.OpenSubKey("SOFTWARE\", True).CreateSubKey("Subtitle-Renamer")
+                My.Computer.Registry.SetValue("HKEY_CURRENT_USER\SOFTWARE\Subtitle-Renamer", "", """" & Application.ExecutablePath & """")
+                My.Computer.Registry.SetValue("HKEY_CURRENT_USER\SOFTWARE\Subtitle-Renamer", "Path", """" & Application.StartupPath & """")
+                My.Computer.Registry.SetValue("HKEY_CURRENT_USER\SOFTWARE\Subtitle-Renamer", "ulevel", "3")
+            Else
+                If My.Computer.Registry.GetValue("HKEY_CURRENT_USER\SOFTWARE\Subtitle-Renamer", "ulevel", "").ToString = "1" Then
+                    System.Threading.Thread.Sleep(2000)
+                    Dim location As String = My.Computer.Registry.GetValue("HKEY_CURRENT_USER\SOFTWARE\Subtitle-Renamer", "", Nothing).ToString
+                    location = location.Replace(Chr(34), "")
+                    My.Computer.FileSystem.CopyFile(Application.ExecutablePath, location, True)
+                    My.Computer.Registry.SetValue("HKEY_CURRENT_USER\SOFTWARE\Subtitle-Renamer", "ulevel", "2")
+                    Process.Start(location)
+                    End
+                ElseIf My.Computer.Registry.GetValue("HKEY_CURRENT_USER\SOFTWARE\Subtitle-Renamer", "ulevel", "").ToString = "2" Then
+                    System.Threading.Thread.Sleep(2000)
+                    System.IO.Directory.Delete(Application.StartupPath + "\update", True)
+                    My.Computer.Registry.SetValue("HKEY_CURRENT_USER\SOFTWARE\Subtitle-Renamer", "ulevel", "3")
+                Else
+                    My.Computer.Registry.SetValue("HKEY_CURRENT_USER\SOFTWARE\Subtitle-Renamer", "", """" & Application.ExecutablePath & """")
+                    My.Computer.Registry.SetValue("HKEY_CURRENT_USER\SOFTWARE\Subtitle-Renamer", "Path", """" & Application.StartupPath & """")
+                    My.Computer.Registry.SetValue("HKEY_CURRENT_USER\SOFTWARE\Subtitle-Renamer", "ulevel", "3")
+                End If
+            End If
+        Catch
+        End Try
+
+    End Sub
+
+    'Private Sub Button2_Click(sender As Object, e As EventArgs) Handles Button2.Click
+    '    System.Threading.Thread.Sleep(2000)
+    '    MsgBox(System.Diagnostics.Process.GetCurrentProcess.MainWindowTitle)
+    'End Sub
 End Class
