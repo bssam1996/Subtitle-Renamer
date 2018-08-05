@@ -9,3 +9,5 @@ D:\Bssam's\My Works\Subtitle Renamer\Subtitle Renamer\obj\Debug\Subtitle Renamer
 D:\Bssam's\My Works\Subtitle Renamer\Subtitle Renamer\obj\Debug\Subtitle Renamer.pdb
 D:\Bssam's\My Works\Subtitle Renamer\Subtitle Renamer\obj\Debug\Subtitle_Renamer.Main.resources
 D:\Bssam's\My Works\Subtitle Renamer\Subtitle Renamer\obj\Debug\Subtitle_Renamer.updateform.resources
+D:\Bssam's\My Works\Subtitle Renamer\Subtitle Renamer\obj\Debug\Subtitle Renamer.vbprojAssemblyReference.cache
+D:\Bssam's\My Works\Subtitle Renamer\Subtitle Renamer\obj\Debug\Subtitle Renamer.vbproj.CoreCompileInputs.cache

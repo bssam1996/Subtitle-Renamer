@@ -11,8 +11,8 @@ Public Class updateform
         Else
             Me.Label4.Text = "Successfully downloaded"
             MessageBox.Show("Successfully downloaded!", "All OK", MessageBoxButtons.OK, MessageBoxIcon.Information)
-            My.Computer.Registry.SetValue("HKEY_CURRENT_USER\SOFTWARE\Copier", "ulevel", "1")
-            Process.Start(Application.StartupPath + "\update\copier.exe")
+            My.Computer.Registry.SetValue("HKEY_CURRENT_USER\SOFTWARE\Subtitle-Renamer", "ulevel", "1")
+            Process.Start(Application.StartupPath + "\update\Subtitle Renamer.exe")
             BackgroundWorker1.Dispose()
             End
         End If
@@ -79,7 +79,7 @@ Public Class updateform
             Dim length As Long = theResponse.ContentLength
             Dim safedelegate As New ChangeTextsSafe(AddressOf ChangeTexts)
             Me.Invoke(safedelegate, length, 0, 0, 0)
-            Dim writeStream As New IO.FileStream(Me.whereToSave + "\Copier.exe", IO.FileMode.Create)
+            Dim writeStream As New IO.FileStream(Me.whereToSave + "\Subtitle Renamer.exe", IO.FileMode.Create)
             Dim nRead As Integer
             Dim speedtimer As New Stopwatch
             Dim currentspeed As Double = -1

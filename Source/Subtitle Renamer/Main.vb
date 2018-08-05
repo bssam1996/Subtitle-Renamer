@@ -3,21 +3,21 @@ Public Class Main
     Dim vnumber As Integer = 0
     Dim subnumber As Integer = 0
     Dim bigger As Integer
-    Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
+    Private Sub Button1_Click(sender As Object, e As EventArgs) Handles LocationButton.Click
         If FolderBrowserDialog1.ShowDialog = DialogResult.OK Then
             adding(FolderBrowserDialog1.SelectedPath)
         End If
     End Sub
     Public Sub adding(path As String)
         Try
-            ListView1.Items.Clear()
+            ItemsList.Items.Clear()
             subnumber = 0
             vnumber = 0
-            Label1.Text = path
-            If Label1.Text.Count = 3 Then
-                Label1.Text = path
+            LocationLabel.Text = path
+            If LocationLabel.Text.Count = 3 Then
+                LocationLabel.Text = path
             Else
-                Label1.Text = path + "\"
+                LocationLabel.Text = path + "\"
             End If
             Dim extensions As String = ""
             For Each checking As CheckBox In GroupBox1.Controls
@@ -32,15 +32,15 @@ Public Class Main
             'Dim dotPosition As Integer
             For Each dra In diar
                 If extensions.Contains(dra.Extension.ToUpper) Then
-                    ListView1.Items.Add(q.ToString)
+                    ItemsList.Items.Add(q.ToString)
                     'dotPosition = dra.ToString.LastIndexOf(".")
                     'extOnly = dra.ToString.Substring(dotPosition + 1)
-                    ListView1.Items(q - 1).SubItems.Add(IO.Path.GetFileNameWithoutExtension(path + "\" + dra.ToString))
-                    ListView1.Items(q - 1).SubItems.Add(dra.Extension)
+                    ItemsList.Items(q - 1).SubItems.Add(IO.Path.GetFileNameWithoutExtension(path + "\" + dra.ToString))
+                    ItemsList.Items(q - 1).SubItems.Add(dra.Extension)
                     q += 1
                 End If
             Next
-            vnumber = ListView1.Items.Count
+            vnumber = ItemsList.Items.Count
             extensions = ""
             For Each checking As CheckBox In GroupBox2.Controls
                 If checking.Checked = True Then
@@ -53,11 +53,11 @@ Public Class Main
                     subnumber += 1
                 End If
             Next
-            If subnumber > ListView1.Items.Count Then
-                For k = 1 To diar.Count - ListView1.Items.Count
-                    ListView1.Items.Add(q.ToString)
-                    ListView1.Items(q - 1).SubItems.Add("")
-                    ListView1.Items(q - 1).SubItems.Add("")
+            If subnumber > ItemsList.Items.Count Then
+                For k = 1 To diar.Count - ItemsList.Items.Count
+                    ItemsList.Items.Add(q.ToString)
+                    ItemsList.Items(q - 1).SubItems.Add("")
+                    ItemsList.Items(q - 1).SubItems.Add("")
                     q += 1
                 Next
             End If
@@ -69,8 +69,8 @@ Public Class Main
             Dim i As Integer = 0
             For Each dra In diar
                 If extensions.Contains(dra.Extension.ToUpper) Then
-                    ListView1.Items(i).SubItems.Add(IO.Path.GetFileNameWithoutExtension(path + "\" + dra.ToString))
-                    ListView1.Items(i).SubItems.Add(dra.Extension)
+                    ItemsList.Items(i).SubItems.Add(IO.Path.GetFileNameWithoutExtension(path + "\" + dra.ToString))
+                    ItemsList.Items(i).SubItems.Add(dra.Extension)
                     i += 1
                 End If
             Next
@@ -82,9 +82,9 @@ Public Class Main
                 apply.Enabled = True
                 For k = 0 To subnumber - 1
                     If k > vnumber Then
-                        ListView1.Items(k).SubItems.Add("0")
+                        ItemsList.Items(k).SubItems.Add("0")
                     Else
-                        ListView1.Items(k).SubItems.Add((k + 1).ToString)
+                        ItemsList.Items(k).SubItems.Add((k + 1).ToString)
                     End If
                 Next
             Else
@@ -101,14 +101,14 @@ Public Class Main
     End Sub
     Private Sub DeleteThisItemToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles DeleteThisItemToolStripMenuItem.Click
         Try
-            For Each i As ListViewItem In ListView1.SelectedItems
-                If ListView1.SelectedItems(0).Text <> "" Then
+            For Each i As ListViewItem In ItemsList.SelectedItems
+                If ItemsList.SelectedItems(0).Text <> "" Then
                     vnumber -= 1
                 End If
-                If ListView1.SelectedItems(0).SubItems(1).Text <> "" Then
+                If ItemsList.SelectedItems(0).SubItems(1).Text <> "" Then
                     subnumber -= 1
                 End If
-                ListView1.Items.Remove(i)
+                ItemsList.Items.Remove(i)
             Next
             Label2.Text = "Total Video Files : " & vnumber & vbNewLine & "Total Subtitle files : " & subnumber
         Catch ex As Exception
@@ -118,22 +118,22 @@ Public Class Main
 
     Private Sub ClearAllToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ClearAllToolStripMenuItem.Click
         Try
-            ListView1.Items.Clear()
+            ItemsList.Items.Clear()
             Label2.Text = "Total Video Files : 0" & vbNewLine & "Total Subtitle files : 0"
         Catch ex As Exception
             MsgBox("There was an error occured" & vbNewLine & "Details :" & vbNewLine & ex.Message, MsgBoxStyle.Critical, "Error")
         End Try
     End Sub
     Private Sub DetailsDefaultToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles DetailsDefaultToolStripMenuItem.Click
-        ListView1.View = View.Details
+        ItemsList.View = View.Details
     End Sub
 
     Private Sub ListToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ListToolStripMenuItem.Click
-        ListView1.View = View.List
+        ItemsList.View = View.List
     End Sub
 
     Private Sub TilesToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles TilesToolStripMenuItem.Click
-        ListView1.View = View.Tile
+        ItemsList.View = View.Tile
     End Sub
 
     Private Sub EndToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles EndToolStripMenuItem.Click
@@ -143,7 +143,7 @@ Public Class Main
     Private Sub AboutToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles AboutToolStripMenuItem.Click
         About.ShowDialog()
     End Sub
-    Private Sub ListView1_DragDrop(sender As Object, e As DragEventArgs) Handles ListView1.DragDrop
+    Private Sub ListView1_DragDrop(sender As Object, e As DragEventArgs) Handles ItemsList.DragDrop
         Try
             If e.Data.GetDataPresent(DataFormats.FileDrop) Then
                 Dim filePaths As String() = CType(e.Data.GetData(DataFormats.FileDrop), String())
@@ -156,7 +156,7 @@ Public Class Main
         End Try
     End Sub
 
-    Private Sub ListView1_DragEnter(sender As Object, e As DragEventArgs) Handles ListView1.DragEnter
+    Private Sub ListView1_DragEnter(sender As Object, e As DragEventArgs) Handles ItemsList.DragEnter
         If e.Data.GetDataPresent(DataFormats.FileDrop) Then
             Dim filePaths As String() = CType(e.Data.GetData(DataFormats.FileDrop), String())
             If Directory.Exists(filePaths(0)) Then
@@ -176,9 +176,9 @@ Public Class Main
 
             For k = 0 To subnumber - 1
                 If k > vnumber Then
-                    ListView1.Items(k).SubItems(5).Text = "0"
+                    ItemsList.Items(k).SubItems(5).Text = "0"
                 Else
-                    ListView1.Items(k).SubItems(5).Text = k + 1
+                    ItemsList.Items(k).SubItems(5).Text = k + 1
                 End If
             Next
         Catch ex As Exception
@@ -195,9 +195,9 @@ Public Class Main
             apply.Enabled = True
             For k = 0 To subnumber - 1
                 If k > vnumber Then
-                    ListView1.Items(k).SubItems.Add("0")
+                    ItemsList.Items(k).SubItems.Add("0")
                 Else
-                    ListView1.Items(k).SubItems.Add((k + 1).ToString)
+                    ItemsList.Items(k).SubItems.Add((k + 1).ToString)
                 End If
             Next
         Catch ex As Exception
@@ -207,12 +207,12 @@ Public Class Main
 
     Private Sub plus_Click(sender As Object, e As EventArgs) Handles plus.Click
         Try
-            If ListView1.SelectedItems.Count > 0 Then
-                If ListView1.SelectedItems(0).SubItems(5).Text < vnumber Then
-                    ListView1.SelectedItems(0).SubItems(5).Text += 1
+            If ItemsList.SelectedItems.Count > 0 Then
+                If ItemsList.SelectedItems(0).SubItems(5).Text < vnumber Then
+                    ItemsList.SelectedItems(0).SubItems(5).Text += 1
                 End If
             End If
-            ListView1.Focus()
+            ItemsList.Focus()
         Catch ex As Exception
             MsgBox("There was an error occured" & vbNewLine & "Details :" & vbNewLine & ex.Message, MsgBoxStyle.Critical, "Error")
         End Try
@@ -220,12 +220,12 @@ Public Class Main
 
     Private Sub minus_Click(sender As Object, e As EventArgs) Handles minus.Click
         Try
-            If ListView1.SelectedItems.Count > 0 Then
-                If ListView1.SelectedItems(0).SubItems(5).Text > 1 Then
-                    ListView1.SelectedItems(0).SubItems(5).Text -= 1
+            If ItemsList.SelectedItems.Count > 0 Then
+                If ItemsList.SelectedItems(0).SubItems(5).Text > 1 Then
+                    ItemsList.SelectedItems(0).SubItems(5).Text -= 1
                 End If
             End If
-            ListView1.Focus()
+            ItemsList.Focus()
         Catch ex As Exception
             MsgBox("There was an error occured" & vbNewLine & "Details :" & vbNewLine & ex.Message, MsgBoxStyle.Critical, "Error")
         End Try
@@ -235,19 +235,19 @@ Public Class Main
         Try
             For k = 0 To subnumber - 2
                 For i = k + 1 To subnumber - 1
-                    If ListView1.Items(k).SubItems(3).Text = ListView1.Items(i).SubItems(3).Text And ListView1.Items(k).SubItems(4).Text = ListView1.Items(i).SubItems(4).Text Then
-                        MsgBox("There is a repeated subtitle name in row " + ListView1.Items(k).Text + " With row " + ListView1.Items(i).Text)
+                    If ItemsList.Items(k).SubItems(3).Text = ItemsList.Items(i).SubItems(3).Text And ItemsList.Items(k).SubItems(4).Text = ItemsList.Items(i).SubItems(4).Text Then
+                        MsgBox("There is a repeated subtitle name in row " + ItemsList.Items(k).Text + " With row " + ItemsList.Items(i).Text)
                         Exit Sub
                     End If
                 Next
             Next
             For k = 0 To subnumber - 1
-                Dim num As Integer = Val(ListView1.Items(k).SubItems(5).Text)
-                Dim fullsub As String = ListView1.Items(k).SubItems(3).Text + ListView1.Items(k).SubItems(4).Text
-                Dim movname As String = ListView1.Items(num - 1).SubItems(1).Text
+                Dim num As Integer = Val(ItemsList.Items(k).SubItems(5).Text)
+                Dim fullsub As String = ItemsList.Items(k).SubItems(3).Text + ItemsList.Items(k).SubItems(4).Text
+                Dim movname As String = ItemsList.Items(num - 1).SubItems(1).Text
 
-                If My.Computer.FileSystem.FileExists(Label1.Text + movname + ListView1.Items(k).SubItems(4).Text) = False And ListView1.Items(k).SubItems(5).Text <> "0" Then
-                    My.Computer.FileSystem.RenameFile(Label1.Text + fullsub, movname + ListView1.Items(k).SubItems(4).Text)
+                If My.Computer.FileSystem.FileExists(LocationLabel.Text + movname + ItemsList.Items(k).SubItems(4).Text) = False And ItemsList.Items(k).SubItems(5).Text <> "0" Then
+                    My.Computer.FileSystem.RenameFile(LocationLabel.Text + fullsub, movname + ItemsList.Items(k).SubItems(4).Text)
                 End If
             Next
             MsgBox("Done!", MsgBoxStyle.Information, "Success")
@@ -294,9 +294,9 @@ Public Class Main
 
     Private Sub ExcludeInChangingToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ExcludeInChangingToolStripMenuItem.Click
         Try
-            If ListView1.SelectedItems.Count > 0 Then
-                For i = 0 To ListView1.SelectedItems.Count - 1
-                    ListView1.SelectedItems(i).SubItems(5).Text = "0"
+            If ItemsList.SelectedItems.Count > 0 Then
+                For i = 0 To ItemsList.SelectedItems.Count - 1
+                    ItemsList.SelectedItems(i).SubItems(5).Text = "0"
                 Next
             End If
         Catch ex As Exception
@@ -314,14 +314,14 @@ Public Class Main
         End If
     End Sub
 
-    Private Sub ListView1_KeyDown(sender As Object, e As KeyEventArgs) Handles ListView1.KeyDown
+    Private Sub ListView1_KeyDown(sender As Object, e As KeyEventArgs) Handles ItemsList.KeyDown
         If e.KeyCode = Keys.Add Then
             If plus.Enabled = True Then
                 Try
-                    If ListView1.SelectedItems.Count > 0 Then
-                        For i = 0 To ListView1.SelectedItems.Count - 1
-                            If ListView1.SelectedItems(i).SubItems(5).Text < vnumber Then
-                                ListView1.SelectedItems(i).SubItems(5).Text += 1
+                    If ItemsList.SelectedItems.Count > 0 Then
+                        For i = 0 To ItemsList.SelectedItems.Count - 1
+                            If ItemsList.SelectedItems(i).SubItems(5).Text < vnumber Then
+                                ItemsList.SelectedItems(i).SubItems(5).Text += 1
                             End If
                         Next
                     End If
@@ -333,10 +333,10 @@ Public Class Main
         End If
         If e.KeyCode = Keys.Subtract Then
             Try
-                If ListView1.SelectedItems.Count > 0 Then
-                    For i = 0 To ListView1.SelectedItems.Count - 1
-                        If ListView1.SelectedItems(i).SubItems(5).Text > 1 Then
-                            ListView1.SelectedItems(i).SubItems(5).Text -= 1
+                If ItemsList.SelectedItems.Count > 0 Then
+                    For i = 0 To ItemsList.SelectedItems.Count - 1
+                        If ItemsList.SelectedItems(i).SubItems(5).Text > 1 Then
+                            ItemsList.SelectedItems(i).SubItems(5).Text -= 1
                         End If
                     Next
                 End If
@@ -376,7 +376,7 @@ Public Class Main
     Private Sub Main_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         Try
             System.Windows.Forms.Control.CheckForIllegalCrossThreadCalls = False
-            Me.Text = "Subtitle-Renamer V" + Application.ProductVersion
+            Me.TitleLabel.Text = "B++ -Subtitle-Renamer- V" + Application.ProductVersion
             If Microsoft.Win32.Registry.CurrentUser.OpenSubKey("SOFTWARE\Subtitle-Renamer") Is Nothing Then
                 Microsoft.Win32.Registry.CurrentUser.OpenSubKey("SOFTWARE\", True).CreateSubKey("Subtitle-Renamer")
                 My.Computer.Registry.SetValue("HKEY_CURRENT_USER\SOFTWARE\Subtitle-Renamer", "", """" & Application.ExecutablePath & """")
@@ -401,9 +401,96 @@ Public Class Main
                     My.Computer.Registry.SetValue("HKEY_CURRENT_USER\SOFTWARE\Subtitle-Renamer", "ulevel", "3")
                 End If
             End If
+            MenuButton_Click(MenuButton, e)
+            FilterButton_Click(FilterButton, e)
         Catch
         End Try
 
+    End Sub
+
+    Private Sub MenuButton_Click(sender As Object, e As EventArgs) Handles MenuButton.Click
+        If OptionsPanel.Width = 200 Then
+            While OptionsPanel.Width > 50
+                OptionsPanel.Width -= 5
+                MenuButton.Location = New Point(MenuButton.Location.X - 5, MenuButton.Location.Y)
+                ItemsList.Location = New Point(ItemsList.Location.X - 5, ItemsList.Location.Y)
+                ItemsList.Width = ItemsList.Width + 5
+                System.Threading.Thread.Sleep(1)
+            End While
+            movie.Width += 75
+            subtitle.Width += 75
+        Else
+            While OptionsPanel.Width < 200
+                OptionsPanel.Width += 5
+                MenuButton.Location = New Point(MenuButton.Location.X + 5, MenuButton.Location.Y)
+                ItemsList.Location = New Point(ItemsList.Location.X + 5, ItemsList.Location.Y)
+                ItemsList.Width = ItemsList.Width - 5
+                System.Threading.Thread.Sleep(1)
+            End While
+            movie.Width -= 75
+            subtitle.Width -= 75
+        End If
+    End Sub
+
+    Private Sub FilterButton_Click(sender As Object, e As EventArgs) Handles FilterButton.Click
+        If FiltersPanel.Width = 160 Then
+            While FiltersPanel.Width > 44
+                FiltersPanel.Width -= 4
+                FilterButton.Location = New Point(FilterButton.Location.X + 4, FilterButton.Location.Y)
+                ItemsList.Width = ItemsList.Width + 4
+                System.Threading.Thread.Sleep(1)
+            End While
+            movie.Width += 58
+            subtitle.Width += 58
+        Else
+            While FiltersPanel.Width < 160
+                FiltersPanel.Width += 4
+                FilterButton.Location = New Point(FilterButton.Location.X - 4, FilterButton.Location.Y)
+                ItemsList.Width = ItemsList.Width - 4
+                System.Threading.Thread.Sleep(1)
+            End While
+            movie.Width -= 58
+            subtitle.Width -= 58
+        End If
+    End Sub
+    Private Sub EndButton_Click(sender As Object, e As EventArgs) Handles EndButton.Click
+        End
+    End Sub
+
+    Private Sub MaximizeButton_Click(sender As Object, e As EventArgs) Handles MaximizeButton.Click
+        If Me.WindowState = FormWindowState.Normal Then
+            Me.WindowState = FormWindowState.Maximized
+        Else
+            Me.WindowState = FormWindowState.Normal
+        End If
+
+    End Sub
+
+    Private Sub MinimizeButton_Click(sender As Object, e As EventArgs) Handles MinimizeButton.Click
+        Me.WindowState = FormWindowState.Minimized
+    End Sub
+    Dim drag As Boolean
+    Dim mousex As Integer
+    Dim mousey As Integer
+    Private Sub TopPanel1_MouseDown(sender As Object, e As MouseEventArgs) Handles TopPanel1.MouseDown, TitleLabel.MouseDown, LocationLabel.MouseDown
+        drag = True
+        mousex = Windows.Forms.Cursor.Position.X - Me.Left
+        mousey = Windows.Forms.Cursor.Position.Y - Me.Top
+    End Sub
+
+    Private Sub TopPanel1_MouseMove(sender As Object, e As MouseEventArgs) Handles TopPanel1.MouseMove, TitleLabel.MouseMove, LocationLabel.MouseMove
+        If drag Then
+            Me.Top = Windows.Forms.Cursor.Position.Y - mousey
+            Me.Left = Windows.Forms.Cursor.Position.X - mousex
+        End If
+    End Sub
+
+    Private Sub TopPanel1_MouseUp(sender As Object, e As MouseEventArgs) Handles TopPanel1.MouseUp, TitleLabel.MouseUp, LocationLabel.MouseUp
+        drag = False
+    End Sub
+
+    Private Sub CopierIcon_Click(sender As Object, e As EventArgs) Handles CopierIcon.Click
+        About.ShowDialog()
     End Sub
 
     'Private Sub Button2_Click(sender As Object, e As EventArgs) Handles Button2.Click
