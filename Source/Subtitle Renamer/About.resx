@@ -413,7 +413,10 @@ You can exclude sub files from changing their names.
 You can also specify the added extensions while importing the folder.</value>
   </data>
   <data name="TextBox2.Text" xml:space="preserve">
-    <value>Version 2.0:-
+    <value>Version 2.1:-
+- Added quick renaming in context menu where you can rename while in the folder by right clicking and open subtitle renamer after checking the option in the main context menu.
+- Fixed a bug with Add/Subtract buttons with multiple selection
+Version 2.0:-
 - Changed the UI
 - Made some improvements
 Version 1.4:-

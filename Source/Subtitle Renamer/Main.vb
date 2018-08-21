@@ -3,7 +3,8 @@ Public Class Main
     Dim vnumber As Integer = 0
     Dim subnumber As Integer = 0
     Dim bigger As Integer
-    Private Sub Button1_Click(sender As Object, e As EventArgs) Handles LocationButton.Click
+    Dim locationwindows As String = ""
+    Private Sub LocationButton_Click(sender As Object, e As EventArgs) Handles LocationButton.Click
         If FolderBrowserDialog1.ShowDialog = DialogResult.OK Then
             adding(FolderBrowserDialog1.SelectedPath)
         End If
@@ -143,7 +144,7 @@ Public Class Main
     Private Sub AboutToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles AboutToolStripMenuItem.Click
         About.ShowDialog()
     End Sub
-    Private Sub ListView1_DragDrop(sender As Object, e As DragEventArgs) Handles ItemsList.DragDrop
+    Private Sub ItemsList_DragDrop(sender As Object, e As DragEventArgs) Handles ItemsList.DragDrop
         Try
             If e.Data.GetDataPresent(DataFormats.FileDrop) Then
                 Dim filePaths As String() = CType(e.Data.GetData(DataFormats.FileDrop), String())
@@ -156,7 +157,7 @@ Public Class Main
         End Try
     End Sub
 
-    Private Sub ListView1_DragEnter(sender As Object, e As DragEventArgs) Handles ItemsList.DragEnter
+    Private Sub ItemsList_DragEnter(sender As Object, e As DragEventArgs) Handles ItemsList.DragEnter
         If e.Data.GetDataPresent(DataFormats.FileDrop) Then
             Dim filePaths As String() = CType(e.Data.GetData(DataFormats.FileDrop), String())
             If Directory.Exists(filePaths(0)) Then
@@ -208,9 +209,11 @@ Public Class Main
     Private Sub plus_Click(sender As Object, e As EventArgs) Handles plus.Click
         Try
             If ItemsList.SelectedItems.Count > 0 Then
-                If ItemsList.SelectedItems(0).SubItems(5).Text < vnumber Then
-                    ItemsList.SelectedItems(0).SubItems(5).Text += 1
-                End If
+                For i = 0 To ItemsList.SelectedItems.Count - 1
+                    If ItemsList.SelectedItems(i).SubItems(5).Text < vnumber Then
+                        ItemsList.SelectedItems(i).SubItems(5).Text += 1
+                    End If
+                Next
             End If
             ItemsList.Focus()
         Catch ex As Exception
@@ -221,9 +224,11 @@ Public Class Main
     Private Sub minus_Click(sender As Object, e As EventArgs) Handles minus.Click
         Try
             If ItemsList.SelectedItems.Count > 0 Then
-                If ItemsList.SelectedItems(0).SubItems(5).Text > 1 Then
-                    ItemsList.SelectedItems(0).SubItems(5).Text -= 1
-                End If
+                For i = 0 To ItemsList.SelectedItems.Count - 1
+                    If ItemsList.SelectedItems(i).SubItems(5).Text > 1 Then
+                        ItemsList.SelectedItems(i).SubItems(5).Text -= 1
+                    End If
+                Next
             End If
             ItemsList.Focus()
         Catch ex As Exception
@@ -250,7 +255,12 @@ Public Class Main
                     My.Computer.FileSystem.RenameFile(LocationLabel.Text + fullsub, movname + ItemsList.Items(k).SubItems(4).Text)
                 End If
             Next
-            MsgBox("Done!", MsgBoxStyle.Information, "Success")
+            If locationwindows <> "" Then
+                End
+            Else
+                MsgBox("Done!", MsgBoxStyle.Information, "Success")
+            End If
+
         Catch ex As Exception
             MsgBox("There was an error occured" & vbNewLine & "Details :" & vbNewLine & ex.Message, MsgBoxStyle.Critical, "Error")
         End Try
@@ -305,13 +315,8 @@ Public Class Main
     End Sub
 
     Private Sub AlwaysOnTopToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles AlwaysOnTopToolStripMenuItem.Click
-        If AlwaysOnTopToolStripMenuItem.Checked = True Then
-            AlwaysOnTopToolStripMenuItem.Checked = False
-            Me.TopMost = False
-        Else
-            AlwaysOnTopToolStripMenuItem.Checked = True
-            Me.TopMost = True
-        End If
+        Me.TopMost = Not (AlwaysOnTopToolStripMenuItem.Checked)
+        AlwaysOnTopToolStripMenuItem.Checked = Not (AlwaysOnTopToolStripMenuItem.Checked)
     End Sub
 
     Private Sub ListView1_KeyDown(sender As Object, e As KeyEventArgs) Handles ItemsList.KeyDown
@@ -325,7 +330,7 @@ Public Class Main
                             End If
                         Next
                     End If
-                    '   ListView1.Focus()
+                    e.Handled = True
                 Catch ex As Exception
                     MsgBox("There was an error occured" & vbNewLine & "Details :" & vbNewLine & ex.Message, MsgBoxStyle.Critical, "Error")
                 End Try
@@ -340,6 +345,7 @@ Public Class Main
                         End If
                     Next
                 End If
+                e.Handled = True
                 ' ListView1.Focus()
             Catch ex As Exception
                 MsgBox("There was an error occured" & vbNewLine & "Details :" & vbNewLine & ex.Message, MsgBoxStyle.Critical, "Error")
@@ -401,8 +407,30 @@ Public Class Main
                     My.Computer.Registry.SetValue("HKEY_CURRENT_USER\SOFTWARE\Subtitle-Renamer", "ulevel", "3")
                 End If
             End If
-            MenuButton_Click(MenuButton, e)
-            FilterButton_Click(FilterButton, e)
+            Try
+                If Microsoft.Win32.Registry.CurrentUser.OpenSubKey("SOFTWARE\Classes\directory\Background\shell\Subtitle-Renamer") Is Nothing Or
+                Microsoft.Win32.Registry.CurrentUser.OpenSubKey("SOFTWARE\Classes\directory\shell\Subtitle-Renamer") Is Nothing Or
+                Microsoft.Win32.Registry.CurrentUser.OpenSubKey("SOFTWARE\Classes\*\shell\Subtitle-Renamer") Is Nothing Then
+                    AddSubRenToRightClickContextMenuOfWindowsToolStripMenuItem.Text = "Add Sub-Ren to right click context menu of windows"
+                Else
+                    AddSubRenToRightClickContextMenuOfWindowsToolStripMenuItem.Checked = True
+                    AddSubRenToRightClickContextMenuOfWindowsToolStripMenuItem.Text = "Remove Sub-Ren to right click context menu of windows"
+                End If
+            Catch
+            End Try
+            If My.Application.CommandLineArgs.Count > 0 Then
+                For i As Integer = 0 To My.Application.CommandLineArgs.Count - 1
+                    locationwindows = locationwindows + My.Application.CommandLineArgs(i).ToString + " "
+                Next
+                locationwindows = locationwindows.Trim
+                adding(locationwindows)
+                apply.PerformClick()
+
+            Else
+                MenuButton_Click(MenuButton, e)
+                FilterButton_Click(FilterButton, e)
+            End If
+
         Catch
         End Try
 
@@ -491,6 +519,68 @@ Public Class Main
 
     Private Sub CopierIcon_Click(sender As Object, e As EventArgs) Handles CopierIcon.Click
         About.ShowDialog()
+    End Sub
+
+    Private Sub AddSubRenToRightClickContextMenuOfWindowsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles AddSubRenToRightClickContextMenuOfWindowsToolStripMenuItem.Click
+        Try
+            If AddSubRenToRightClickContextMenuOfWindowsToolStripMenuItem.Text.Contains("Add") Then
+                'For Windows explorer
+                If Microsoft.Win32.Registry.CurrentUser.OpenSubKey("SOFTWARE\Classes\directory") Is Nothing Then
+                    Microsoft.Win32.Registry.CurrentUser.OpenSubKey("SOFTWARE\Classes\", True).CreateSubKey("directory")
+                End If
+                If Microsoft.Win32.Registry.CurrentUser.OpenSubKey("SOFTWARE\Classes\directory\Background") Is Nothing Then
+                    Microsoft.Win32.Registry.CurrentUser.OpenSubKey("SOFTWARE\Classes\directory\", True).CreateSubKey("Background")
+                End If
+                If Microsoft.Win32.Registry.CurrentUser.OpenSubKey("SOFTWARE\Classes\directory\Background\shell") Is Nothing Then
+                    Microsoft.Win32.Registry.CurrentUser.OpenSubKey("SOFTWARE\Classes\directory\Background\", True).CreateSubKey("shell")
+                End If
+                If Microsoft.Win32.Registry.CurrentUser.OpenSubKey("SOFTWARE\Classes\directory\Background\shell\Subtitle-Renamer") Is Nothing Then
+                    Microsoft.Win32.Registry.CurrentUser.OpenSubKey("SOFTWARE\Classes\directory\Background\shell\", True).CreateSubKey("Subtitle-Renamer")
+                End If
+                If Microsoft.Win32.Registry.CurrentUser.OpenSubKey("SOFTWARE\Classes\directory\Background\shell\Subtitle-Renamer\command") Is Nothing Then
+                    Microsoft.Win32.Registry.CurrentUser.OpenSubKey("SOFTWARE\Classes\directory\Background\shell\Subtitle-Renamer\", True).CreateSubKey("command")
+                End If
+                My.Computer.Registry.SetValue("HKEY_CURRENT_USER\SOFTWARE\Classes\directory\Background\shell\Subtitle-Renamer", "", "Quick Subtitle-Renamer")
+                My.Computer.Registry.SetValue("HKEY_CURRENT_USER\SOFTWARE\Classes\directory\Background\shell\Subtitle-Renamer", "Icon", Application.ExecutablePath)
+                My.Computer.Registry.SetValue("HKEY_CURRENT_USER\SOFTWARE\Classes\directory\Background\shell\Subtitle-Renamer\command", "", Application.ExecutablePath + " %v")
+                'For folders
+                If Microsoft.Win32.Registry.CurrentUser.OpenSubKey("SOFTWARE\Classes\directory\shell") Is Nothing Then
+                    Microsoft.Win32.Registry.CurrentUser.OpenSubKey("SOFTWARE\Classes\directory\", True).CreateSubKey("shell")
+                End If
+                If Microsoft.Win32.Registry.CurrentUser.OpenSubKey("SOFTWARE\Classes\directory\shell\Subtitle-Renamer") Is Nothing Then
+                    Microsoft.Win32.Registry.CurrentUser.OpenSubKey("SOFTWARE\Classes\directory\shell\", True).CreateSubKey("Subtitle-Renamer")
+                End If
+                If Microsoft.Win32.Registry.CurrentUser.OpenSubKey("SOFTWARE\Classes\directory\shell\Subtitle-Renamer\command") Is Nothing Then
+                    Microsoft.Win32.Registry.CurrentUser.OpenSubKey("SOFTWARE\Classes\directory\shell\Subtitle-Renamer\", True).CreateSubKey("command")
+                End If
+                My.Computer.Registry.SetValue("HKEY_CURRENT_USER\SOFTWARE\Classes\directory\shell\Subtitle-Renamer", "", "Quick Subtitle-Renamer")
+                My.Computer.Registry.SetValue("HKEY_CURRENT_USER\SOFTWARE\Classes\directory\shell\Subtitle-Renamer", "Icon", Application.ExecutablePath)
+                My.Computer.Registry.SetValue("HKEY_CURRENT_USER\SOFTWARE\Classes\directory\shell\Subtitle-Renamer\command", "", Application.ExecutablePath + " %v")
+                'For Files
+                If Microsoft.Win32.Registry.CurrentUser.OpenSubKey("SOFTWARE\Classes\*\shell") Is Nothing Then
+                    Microsoft.Win32.Registry.CurrentUser.OpenSubKey("SOFTWARE\Classes\*\", True).CreateSubKey("shell")
+                End If
+                If Microsoft.Win32.Registry.CurrentUser.OpenSubKey("SOFTWARE\Classes\*\shell\Subtitle-Renamer") Is Nothing Then
+                    Microsoft.Win32.Registry.CurrentUser.OpenSubKey("SOFTWARE\Classes\*\shell\", True).CreateSubKey("Subtitle-Renamer")
+                End If
+                If Microsoft.Win32.Registry.CurrentUser.OpenSubKey("SOFTWARE\Classes\*\shell\Subtitle-Renamer\command") Is Nothing Then
+                    Microsoft.Win32.Registry.CurrentUser.OpenSubKey("SOFTWARE\Classes\*\shell\Subtitle-Renamer\", True).CreateSubKey("command")
+                End If
+                My.Computer.Registry.SetValue("HKEY_CURRENT_USER\SOFTWARE\Classes\*\shell\Subtitle-Renamer", "", "Quick Subtitle-Renamer")
+                My.Computer.Registry.SetValue("HKEY_CURRENT_USER\SOFTWARE\Classes\*\shell\Subtitle-Renamer", "Icon", Application.ExecutablePath)
+                My.Computer.Registry.SetValue("HKEY_CURRENT_USER\SOFTWARE\Classes\*\shell\Subtitle-Renamer\command", "", Application.ExecutablePath + " %v")
+                AddSubRenToRightClickContextMenuOfWindowsToolStripMenuItem.Checked = True
+                AddSubRenToRightClickContextMenuOfWindowsToolStripMenuItem.Text = "Remove Sub-Ren to right click context menu of windows"
+            Else
+                Microsoft.Win32.Registry.CurrentUser.DeleteSubKeyTree("SOFTWARE\Classes\*\shell\Subtitle-Renamer")
+                Microsoft.Win32.Registry.CurrentUser.DeleteSubKeyTree("SOFTWARE\Classes\directory\shell\Subtitle-Renamer")
+                Microsoft.Win32.Registry.CurrentUser.DeleteSubKeyTree("SOFTWARE\Classes\directory\Background\shell\Subtitle-Renamer")
+                AddSubRenToRightClickContextMenuOfWindowsToolStripMenuItem.Checked = False
+                AddSubRenToRightClickContextMenuOfWindowsToolStripMenuItem.Text = "Add Sub-Ren to right click context menu of windows"
+            End If
+        Catch ex As Exception
+            MsgBox(ex.Message)
+        End Try
     End Sub
 
     'Private Sub Button2_Click(sender As Object, e As EventArgs) Handles Button2.Click

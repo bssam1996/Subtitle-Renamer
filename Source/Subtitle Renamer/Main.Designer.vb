@@ -90,6 +90,7 @@ Partial Class Main
         Me.TitleLabel = New System.Windows.Forms.Label()
         Me.CopierIcon = New System.Windows.Forms.PictureBox()
         Me.FiltersPanel = New System.Windows.Forms.Panel()
+        Me.AddSubRenToRightClickContextMenuOfWindowsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ListContextMenuStrip.SuspendLayout()
         Me.OptionsPanel.SuspendLayout()
         Me.MainContextMenuStrip.SuspendLayout()
@@ -332,35 +333,35 @@ Partial Class Main
         '
         'MainContextMenuStrip
         '
-        Me.MainContextMenuStrip.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.CheckForUpdatesToolStripMenuItem, Me.AlwaysOnTopToolStripMenuItem, Me.AboutToolStripMenuItem, Me.EndToolStripMenuItem})
+        Me.MainContextMenuStrip.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.AddSubRenToRightClickContextMenuOfWindowsToolStripMenuItem, Me.CheckForUpdatesToolStripMenuItem, Me.AlwaysOnTopToolStripMenuItem, Me.AboutToolStripMenuItem, Me.EndToolStripMenuItem})
         Me.MainContextMenuStrip.Name = "ContextMenuStrip1"
-        Me.MainContextMenuStrip.Size = New System.Drawing.Size(171, 92)
+        Me.MainContextMenuStrip.Size = New System.Drawing.Size(354, 136)
         '
         'CheckForUpdatesToolStripMenuItem
         '
         Me.CheckForUpdatesToolStripMenuItem.Image = CType(resources.GetObject("CheckForUpdatesToolStripMenuItem.Image"), System.Drawing.Image)
         Me.CheckForUpdatesToolStripMenuItem.Name = "CheckForUpdatesToolStripMenuItem"
-        Me.CheckForUpdatesToolStripMenuItem.Size = New System.Drawing.Size(170, 22)
+        Me.CheckForUpdatesToolStripMenuItem.Size = New System.Drawing.Size(353, 22)
         Me.CheckForUpdatesToolStripMenuItem.Text = "Check for updates"
         '
         'AlwaysOnTopToolStripMenuItem
         '
         Me.AlwaysOnTopToolStripMenuItem.Name = "AlwaysOnTopToolStripMenuItem"
-        Me.AlwaysOnTopToolStripMenuItem.Size = New System.Drawing.Size(170, 22)
+        Me.AlwaysOnTopToolStripMenuItem.Size = New System.Drawing.Size(353, 22)
         Me.AlwaysOnTopToolStripMenuItem.Text = "Always On Top"
         '
         'AboutToolStripMenuItem
         '
         Me.AboutToolStripMenuItem.Image = CType(resources.GetObject("AboutToolStripMenuItem.Image"), System.Drawing.Image)
         Me.AboutToolStripMenuItem.Name = "AboutToolStripMenuItem"
-        Me.AboutToolStripMenuItem.Size = New System.Drawing.Size(170, 22)
+        Me.AboutToolStripMenuItem.Size = New System.Drawing.Size(353, 22)
         Me.AboutToolStripMenuItem.Text = "About"
         '
         'EndToolStripMenuItem
         '
         Me.EndToolStripMenuItem.Image = CType(resources.GetObject("EndToolStripMenuItem.Image"), System.Drawing.Image)
         Me.EndToolStripMenuItem.Name = "EndToolStripMenuItem"
-        Me.EndToolStripMenuItem.Size = New System.Drawing.Size(170, 22)
+        Me.EndToolStripMenuItem.Size = New System.Drawing.Size(353, 22)
         Me.EndToolStripMenuItem.Text = "End"
         '
         'Label6
@@ -811,6 +812,12 @@ Partial Class Main
         Me.FiltersPanel.Size = New System.Drawing.Size(160, 335)
         Me.FiltersPanel.TabIndex = 16
         '
+        'AddSubRenToRightClickContextMenuOfWindowsToolStripMenuItem
+        '
+        Me.AddSubRenToRightClickContextMenuOfWindowsToolStripMenuItem.Name = "AddSubRenToRightClickContextMenuOfWindowsToolStripMenuItem"
+        Me.AddSubRenToRightClickContextMenuOfWindowsToolStripMenuItem.Size = New System.Drawing.Size(353, 22)
+        Me.AddSubRenToRightClickContextMenuOfWindowsToolStripMenuItem.Text = "Add Sub-Ren to right click context menu of windows"
+        '
         'Main
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -916,4 +923,5 @@ Partial Class Main
     Friend WithEvents Label6 As Label
     Friend WithEvents FilterButton As PictureBox
     Friend WithEvents FiltersPanel As Panel
+    Friend WithEvents AddSubRenToRightClickContextMenuOfWindowsToolStripMenuItem As ToolStripMenuItem
 End Class
